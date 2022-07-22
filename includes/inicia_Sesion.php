@@ -1,13 +1,12 @@
 <?php
 
-require 'conexion_bd.php';
+require 'conexion_userplataforma.php';
 
 session_start();
 
   if (!empty($_POST['email']) && !empty($_POST['password'])) {
 
-    $conexxion = new conexion()
-    $records = $conexxion->prepare('SELECT id, email, password FROM usuarios1 WHERE email = :email');
+    $records = $conn->prepare('SELECT id, email, password FROM usuarios1 WHERE email = :email');
     $records->bindParam(':email', $_POST['email']);
     $records->execute();
     $results = $records->fetch(PDO::FETCH_ASSOC);
