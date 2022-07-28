@@ -11,7 +11,6 @@
 
 <?php 
 $objconexion= new conexion();
-$proyectos=$objconexion->consultar("SELECT * FROM `productos`");
 ?>
 
 <?php
@@ -22,13 +21,13 @@ $proyectos=$objconexion->consultar("SELECT * FROM `productos`");
 	}
 
 	//Main queries
-	$pages->default_ipp	=	15;
+	$pages->default_ipp	=	8;
 	$sql 	= $objconexion->consultar("SELECT * FROM productos WHERE 1 " . $condition . "");
 	$pages->items_total	=	count($sql);
-	$pages->mid_range	=	9;
+	$pages->mid_range	= 4;
 	$pages->paginate();
 
-	$userData	=   $objconexion->consultar("SELECT * FROM productos WHERE 1 " . $condition . " ORDER BY id DESC " . $pages->limit . "");
+	$proyectos	=   $objconexion->consultar("SELECT * FROM productos WHERE 1 " . $condition . " ORDER BY id DESC " . $pages->limit . "");
 
 	?>
 
