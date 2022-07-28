@@ -25,6 +25,15 @@ class conexion{
         return $this->conexion->lastInsertId();
     }
 
+    public function getRecFrmQry($query)
+    {
+        //echo $query;
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rows;
+    }
+
     public function consultar($sql){  // visualizar datos 
       $sentencia=$this->conexion->prepare($sql);
       $sentencia->execute();

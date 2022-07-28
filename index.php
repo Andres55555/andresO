@@ -3,10 +3,35 @@
 <?php include("includes/cabecera.php");  ?> 
 <?php include("includes/conexion_bd.php"); ?> 
 <?php include("includes/conexion_useradmin.php"); ?>
+<?php include_once('includes/paginator.class.php'); 
+  $pages	=	new Paginator();
+?>
+
+
+
 <?php 
 $objconexion= new conexion();
 $proyectos=$objconexion->consultar("SELECT * FROM `productos`");
 ?>
+
+<?php
+
+	$condition	=	'';
+	if (isset($_REQUEST['producto']) and $_REQUEST['producto'] != "") {
+		$condition	.=	' AND nombre LIKE "%' . $_REQUEST['producto'] . '%" ';
+	}
+
+	//Main queries
+	$pages->default_ipp	=	15;
+	$sql 	= $objconexion->consultar("SELECT * FROM productos WHERE 1 " . $condition . "");
+	$pages->items_total	=	count($sql);
+	$pages->mid_range	=	9;
+	$pages->paginate();
+
+	$userData	=   $objconexion->consultar("SELECT * FROM productos WHERE 1 " . $condition . " ORDER BY id DESC " . $pages->limit . "");
+
+	?>
+
 
 <div class="p-4 bg-light">
     <div class="container">
@@ -17,46 +42,39 @@ $proyectos=$objconexion->consultar("SELECT * FROM `productos`");
         <nav class="navbar bg-light">
   <div class="container-fluid">
     <form action class="d-flex" role="search" method="GET" >
-      <input class="form-control me-2" type="search" placeholder="Busqueda de Productos" name="busqueda">
+      <input class="form-control me-2" type="search" placeholder="Busqueda de Productos" name="producto">
       <button class="btn btn-outline-success" type="submit" name="enviar" > Buscar  </button>
     </form>
   </div>
 </nav>
     </div>
 </div>
-<?php
-$conexion=mysqli_connect("localhost","root","","album"); 
-$where="";
 
-if(isset($_GET['enviar'])){
-  $busqueda= $_GET['busqueda'];
-
-
-	if (isset($_GET['busqueda']))
-	{
-		$where="WHERE nombre LIKE'%".$busqueda."%' OR categoria  LIKE'%".$busqueda."%'";
-	}
-  
-}
-
-?>
-
+<div class="row marginTop">
+			<div class="col-sm-12 paddingLeft pagerfwt">
+				<?php if ($pages->items_total > 0) { ?>
+					<?php echo $pages->display_pages(); ?>
+					<?php echo $pages->display_items_per_page(); ?>
+					<?php echo $pages->display_jump_menu(); ?>
+				<?php } ?>
+			</div>
+		</div>
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
  
-<?php foreach($proyectos as $proyecto) { ?>
+  <?php foreach($proyectos as $proyecto) { ?>
 
-  <div class="col">
-    <div class="card">
-      <img src="imagenes/<?php echo $proyecto['imagen']; ?>" class="card-img-top" alt="..." if(true){}>
-      <div class="card-body">
-      <h5 class="card-title"><?php echo $proyecto['nombre']; ?></h5>
-        <p class="card-text"><?php echo $proyecto['precio']; ?></p>
+    <div class="col">
+      <div class="card">
+        <img src="imagenes/<?php echo $proyecto['imagen']; ?>" class="card-img-top" alt="..." if(true){}>
+        <div class="card-body">
+        <h5 class="card-title"><?php echo $proyecto['nombre']; ?></h5>
+          <p class="card-text"><?php echo $proyecto['precio']; ?></p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <?php } ?>
+    <?php } ?>
     
 </div>
 

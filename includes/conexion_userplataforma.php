@@ -3,7 +3,7 @@
 $server = 'localhost';
 $username = 'root';
 $password = '';
-$database = 'usuarios_plataforma';
+$database = 'album';
 
 try {
   $conn = new PDO("mysql:host=$server;dbname=$database;", $username, $password);
