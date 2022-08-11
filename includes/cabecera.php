@@ -11,30 +11,20 @@
 </head>
 <body>
 
-<div class="container"> 
-<ul class="nav nav-tabs">
+<div class="container "> 
+<ul class="nav nav-tabs bg-black" >
   <li class="nav-item">
-    <a class="nav-link" href="index.php">Topacio publicidad ecommerce </a>
+    <a class="nav-link " href="index.php?page=1&ipp=15 " style="color:white;">Topacio publicidad ecommerce  </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="Registro_usuariosTopacio.php">Registrate </a>
+    <a class="nav-link" href="Registro_usuarios.php" style="color:white; ">Registrate </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="inicia_s.php">Iniciar Session </a> 
+    <a class="nav-link" href="inicia_s.php" style="color:white;">Iniciar Session </a> 
   </li>
-  <li class="nav-item">
-  <a class="nav-link" href="cerrar_Session.php">Cerrar Session</a> 
+  <li class="nav-item ">
+  <a class ="nav-link" href="cerrar_Session.php" style="color:white;" >Cerrar Session</a> 
   </li>
 </ul>
 
 
-
-
-
-
- 
-    
-
-
-
-    

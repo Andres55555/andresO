@@ -2,11 +2,18 @@
 <?php include("includes/cabecera.php"); ?> 
 <?php include("includes/conexion_bd.php");?> 
 
+<?php session_start(); 
+$arrays = $_SESSION;
+?>
+<?php foreach($arrays as $loggin) { ?>
+<?php } ?>
 
 <?php
 
 // enviar valores a db
-if($_POST){
+if (!empty($_POST['nombre']) && !empty($_POST['categoria']) && !empty($_POST['precio']) && !empty($_POST['descripcion']) && !empty($_POST['vendedor']) 
+&& !empty($_POST['contacto']) && !empty($_POST['correo']) ) {
+
 $nombre=$_POST['nombre'];   
 $categoria=$_POST['categoria'];
 $fecha= new DateTime();
@@ -43,6 +50,10 @@ $proyectos=$objconexion->consultar("SELECT * FROM `productos`");
 
 ?>
 <br/>
+<div class="card">
+<h3 style="text-align:center"> <?php if(isset($_SESSION["username"])){echo '&#127751 Bienvenido: '.$_SESSION["username"], ' !! Todo listo para Agregar Sus Productos !!' ;}?></h3>
+</div>
+<br/>
 
 <div class="container">
     <div class="row">
@@ -55,9 +66,9 @@ $proyectos=$objconexion->consultar("SELECT * FROM `productos`");
     <div class="card-body">
     <form action="portafolio.php" method="post" enctype="multipart/form-data">
 
-Nombre del producto: <input require class="form-control" type="text" name="nombre" id="">  
+Nombre del producto: <input require class="form-control" type="text" placeholder=&#128747 name="nombre" id="">  
 <br/>
-Categoria del producto: <select require class="form-control" type="text" name="categoria" id="">
+Categoria del producto: <select require class="form-control" type="text"  name="categoria" id="">
 <option value="Agro">Agro</option> 
 <option value="Alimentos">Alimentos</option>
 <option value="Arte">Arte</option>
@@ -79,28 +90,31 @@ Categoria del producto: <select require class="form-control" type="text" name="c
 <option value="vehiculos">vehiculos</option>
 </select>
 <br/>
-Imagen: <input require class="form-control" type="file" name="archivo" id="">
+Imagen: <input require class="form-control"  type="file" name="archivo" id="">
 <br/>
-Precio: <input require class="form-control" type="text" name="precio" id="">
+Precio: <input  require class="form-control" type="number" placeholder=&#128178 name="precio" id="">
 <br/>
-Descripcion: <textarea require class="form-control" name="descripcion" id="" cols="30" rows="3"></textarea>
+Descripcion: <textarea require class="form-control" placeholder=&#128210 name="descripcion" id="" cols="30" rows="3"></textarea>
 <br/>
-vendedor: <input require class="form-control" type="text" name="vendedor" id="">
+vendedor: <input require class="form-control" type="text" placeholder=&#128084 name="vendedor" id="">
 <br/>
-contacto: <input require class="form-control" type="text" name="contacto" id="">
+Numero del Contacto: <input require class="form-control" type="tel" placeholder=&#128241 name="contacto" id="">
 <br/>
-correo electrónico: <input require class="form-control" type="text" name="correo" id="">
+correo electrónico: <input require class="form-control" type="text" placeholder=&#128234 name="correo" id="">
 <br/>
 
-<input class="btn btn-success" type="submit" value="Enviar Datos">   <a class="btn btn-success" type="button" href="registro_useradmin.php">Nuevo Usuario</a>  
+<input class="btn btn-success" type="submit" value="Enviar Datos">   <a class="btn btn-success" type="button" href="Registro_usuarios!!.php">Nuevo Usuario</a>  
     </div>
 </div>
  
         </div>
-        <div class="col-md-6">
+        <div class="row">
+        <div class="col-md-4">
         <table class="table">
+    </div>
     <thead>
         <tr>
+            </div>
             <th>ID</th>
             <th>Nombre</th>
             <th>Categoria</th>
@@ -114,20 +128,23 @@ correo electrónico: <input require class="form-control" type="text" name="corre
         </tr>
     </thead>
     <tbody>
+
+
         <?php foreach($proyectos as $proyecto) { ?>
-            
+   
         <tr>
             <td><?php echo $proyecto['id']; ?></td>
             <td><?php echo $proyecto['nombre']; ?></td>
             <td><?php echo $proyecto['categoria']; ?></td>
-            <td><img width="150" src="imagenes/<?php echo $proyecto['imagen']; ?>" alt="" sizes="" srcset=""></td>
-            <td><?php echo $proyecto['precio']; ?></td>
+            <td><img width="150 px" height="100 px" src="imagenes/<?php echo $proyecto['imagen']; ?>" alt="" sizes="" srcset=""></td>
+            <td><?php echo '$'.$proyecto['precio']; ?></td>
             <td><?php echo $proyecto['descripcion']; ?></td>
             <td><?php echo $proyecto['vendedor']; ?> </td>
             <td><?php echo $proyecto['contacto']; ?></td>
             <td><?php echo $proyecto['correo']; ?></td>
             <td><a class="btn btn-danger" href="?borrar=<?php echo $proyecto['id']; ?>">Eliminar</a></td>
         </tr>
+        
         <?php } ?>
        
     </tbody>
@@ -137,7 +154,6 @@ correo electrónico: <input require class="form-control" type="text" name="corre
         
     </div>
 </div>
-
 
 
 

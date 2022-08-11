@@ -13,7 +13,13 @@ require 'includes/inicia_Sesion.php';
   </head>
   <body>
 
- 
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
 
     <div class="container">
 
@@ -24,7 +30,7 @@ require 'includes/inicia_Sesion.php';
  <br/>
  <div class="card">
    <div class="card-header">
-   Iniciar Sesion
+   Iniciar Session
    </div>
    <div class="card-body">
 
@@ -33,28 +39,14 @@ require 'includes/inicia_Sesion.php';
 Usuario: <input class="form-control" type="text" placeholder="&#129333; usuario" name="email" >
 <br/>
 Contraseña: <input class="form-control" type="password" placeholder="&#128272; contraseña" name="password" >
-<div class="card-header">
+<div class="card-Light">
    <?php if(!empty($message)): ?>
        <?= $message ?>
     <?php endif; ?>
-   <div class="card-body">
-<button class="btn btn-success" type="submit">Entrar al Portafolio</button>  
-
-
-</form>
-   </div>
-   <div class="card-footer text-muted">
-   </div>
- </div>
-
-
- </div>
- <div class="col-md-4">
-   
- </div>    
-</div>
-
-</div>
+    <br/>
+    </div>  
+<button class="btn btn-success col-md-12" type="submit">lngresar Topacio publicidad ecommerce  </button>
+ </div> 
 
   </body>
 </html>
